@@ -23,14 +23,15 @@ class _TableEventsExampleState extends State<TableEventsExample> {
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
   String user="  ";
-  void fire(String userid)
+  void fire()
   {
     FirebaseFirestore.instance
-        .collection("users").doc(userid)
-        .get()
-        .then((DocumentSnapshot file) {
+        .collection("event").doc("event").get().then((DocumentSnapshot file) {
+
+
           file["event"].forEach((key,value) {
             DateTime f=DateTime.parse(key);
+            print(key);
             List<dynamic> l=value;
             List<Event> m=[];
             l.forEach((element) {m.add(Event(element)); });
@@ -109,7 +110,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
   @override
   Widget build(BuildContext context) {
     user = ModalRoute.of(context)?.settings.arguments as String;
-    fire(user);
+    fire();
     print(user);
     return Scaffold(
       appBar: AppBar(
@@ -145,7 +146,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
               _focusedDay = focusedDay;
             },
           ),
-          const SizedBox(height: 8.0),
+          const SizedBox(height: 15.0),
           Expanded(
             child: ValueListenableBuilder<List<Event>>(
               valueListenable: _selectedEvents,
@@ -164,7 +165,32 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                       ),
                       child: ListTile(
                         onTap: () => print('${value[index]}'),
-                        title: Text('${value[index]}'),
+                        title: Row(
+                          children: [
+                            Text('${value[index]}'),
+                            TextButton(
+                              style: ButtonStyle(
+                                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                              ),
+                              onPressed: () {
+                                try
+                                {
+                                  String s=_selectedDay.toString();
+                                  FirebaseFirestore.instance
+                                      .collection("users")
+                                      .doc(user)
+                                      .update({ "event.$s": FieldValue.arrayUnion(['${value[index]}']),});
+                                  print("Added"); print(_selectedDay.toString());
+
+                                }
+                                catch(e){ print(e); }
+
+                              },
+                              child: Text('Add to TODO'),
+                            )
+                          ],
+                        ),
+
                       ),
                     );
                   },

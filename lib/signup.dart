@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Signup extends StatelessWidget {
   Signup({Key? key}) : super(key: key);
   late String name,email,password;
+  FirebaseFirestore db = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -68,13 +69,7 @@ class Signup extends StatelessWidget {
                     password: "$password",
                 );
                 print('1');
-                FirebaseFirestore.instance.collection(email).add({
-                  "key":25 //your data which will be added to the collection and collection will be created after this
-                }).then((_){
-                  print("collection created");
-                }).catchError((_){
-                  print("an error occured");
-                });
+                db.collection("users").doc(email).set({"name": name});
                 print('2');
                 Navigator.pushReplacementNamed(context, 'home',arguments: email);
               } on FirebaseAuthException catch (e) {
