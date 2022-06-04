@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'ToDo.dart';
 import 'events_example.dart';
 import 'signup.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,9 +13,11 @@ Future main() async {
   runApp(MaterialApp(
     initialRoute: 'welcome',
     routes: {
-      'welcome':(context)=> MyApp(),
-      'home' :(context)=> TableEventsExample(),
-      'signup' :(context)=> Signup()},
+      'welcome': (context) => MyApp(),
+      'home': (context) => TableEventsExample(),
+      'signup': (context) => Signup(),
+      'home/todo': (context) => Todo()
+    },
     // home: MyApp(),
        // home: TableEventsExample(),
        ),
@@ -22,27 +25,7 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  // void fire()
-  // {
-  //   FirebaseFirestore.instance
-  //       .collection('Event')
-  //       .get()
-  //       .then((QuerySnapshot querySnapshot) {
-  //     querySnapshot.docs.forEach((doc) {
-  //       Timestamp t=doc["date"];
-  //       List<dynamic> l=doc["event"];
-  //       List<Event> m=[Event('test')];
-  //
-  //       DateTime d = DateTime.fromMicrosecondsSinceEpoch(t.microsecondsSinceEpoch);
-  //
-  //       l.forEach((element) {m.add(Event(element)); });
-  //       kEvents.addAll({
-  //       d: m,
-  //       });
-  //     });
-  //   });
-  // }
+
   @override
   Widget build(BuildContext context) {
     // fire();

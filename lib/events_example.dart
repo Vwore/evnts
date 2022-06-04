@@ -32,7 +32,6 @@ class _TableEventsExampleState extends State<TableEventsExample> {
 
           file["event"].forEach((key,value) {
             DateTime f=DateTime.parse(key);
-            print(key);
             List<dynamic> l=value;
             List<Event> m=[];
             l.forEach((element) {m.add(Event(element)); });
@@ -116,6 +115,46 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     return Scaffold(
       appBar: AppBar(
         title: Text('TableCalendar - Events'),
+      ),
+
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children:  <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.message),
+              title: Text('Home'),
+
+            ),
+            ListTile(
+              leading: Icon(Icons.message),
+              title: Text('ToDo list'),
+              onTap: (){
+                Navigator.pushNamed(context, 'home/todo');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('Profile'),
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Manage event'),
+            ),
+          ],
+        ),
       ),
       body: Column(
         children: [
