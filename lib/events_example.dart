@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
@@ -173,15 +174,16 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                                 foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
                               ),
                               onPressed: () {
+                                // List<String> L=
                                 try
                                 {
-                                  String s=_selectedDay.toString();
+
+                                  DateFormat formatter = DateFormat('yyyy-MM-dd');
+                                  String s=formatter.format(_selectedDay!);
                                   FirebaseFirestore.instance
                                       .collection("users")
                                       .doc(user)
                                       .update({ "event.$s": FieldValue.arrayUnion(['${value[index]}']),});
-                                  print("Added"); print(_selectedDay.toString());
-
                                 }
                                 catch(e){ print(e); }
 
