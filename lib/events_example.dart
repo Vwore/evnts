@@ -142,7 +142,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
               leading: Icon(Icons.message),
               title: Text('ToDo list'),
               onTap: (){
-                Navigator.pushNamed(context, 'home/todo');
+                Navigator.pushNamed(context, 'todoL',arguments: user);
               },
             ),
             ListTile(

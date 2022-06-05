@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'ToDo.dart';
+import 'ToDo_loading.dart';
+import 'Todo.dart';
 import 'events_example.dart';
 import 'signup.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,7 +17,8 @@ Future main() async {
       'welcome': (context) => MyApp(),
       'home': (context) => TableEventsExample(),
       'signup': (context) => Signup(),
-      'home/todo': (context) => Todo()
+      'home/todo': (context) => TodoF(),
+      'todoL': (context)=> Todo(),
     },
     // home: MyApp(),
        // home: TableEventsExample(),
